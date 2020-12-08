@@ -1,5 +1,7 @@
 // Timeblocks go here -->
-
+var DateTime = luxon.DateTime; //--> Luxon's date object
+var localTime=DateTime.local(); // --> To get the current time
+console.log(localTime.toString()) // --> Returns String ->2020-10-21T03:27:22.247+05:30
 
 var daySlot = [
     {
@@ -49,21 +51,16 @@ var daySlot = [
     }
 ];
 
-//DateTime.local().setZone('America/New_York').minus({ weeks: 1 }).endOf('day').toISO();
-
-
-// FUNCTIONS IN J QUERY ADJUST THEM
 function getCurrentDate(){
-
-    var currentDate = DateTime.local().toLocaleString(DateTime.DATETIME_SHORT); // unsure this will work. will be testing tomorrow
-
-    
+    var currentDate = luxon.DateTime.local().toLocaleString(DateTime.DATE_MED)
+    console.log(currentDate);
+    $("#currentDay").text(currentDate);
 }
+getCurrentDate();
 
 
-
-// type and save button --> 
-
+function saveEvent(){
+    localStorage.setItem("daySlot", JSON.stringify("daySlot"));
 }
 
 function displayEvent(){
@@ -74,8 +71,6 @@ function run(){
 
 
 }
-
-
 
 // tomorrow work on functions and also connect the Luxon
 // color coded work  --> 
