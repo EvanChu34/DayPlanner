@@ -110,12 +110,19 @@ daySlot.forEach(function(thisHour){
 
 
 
+    // save button
+    var saveButton = $("<i class='far fa-save'></i>")
+    var savedPlan = $("<button>")
+        .attr({
+            "class": "col-md-1 saveBtn"
+    });
+    savePlan.append(saveButton);
+    timeSlot.append(dayPlan, hourSlot, savedPlan);
 
-    
+
 })
 
 
-// color coded work  --> 
-// look on old code for the save button
+// look on old code for the save button & local storage
 
 
