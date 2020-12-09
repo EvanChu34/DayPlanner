@@ -1,8 +1,4 @@
 // Timeblocks go here -->
-var DateTime = luxon.DateTime; //--> Luxon's date object
-var localTime=DateTime.local(); // --> To get the current time
-console.log(localTime.toString()) // --> Returns String ->2020-10-21T03:27:22.247+05:30
-
 var daySlot = [
     {
         hourSlotID = "1",
@@ -62,24 +58,23 @@ var daySlot = [
 
 function getCurrentDate(){
     var currentDate = luxon.DateTime.local().toLocaleString(DateTime.DATE_MED)
-    console.log(currentDate);
     $("#currentDay").text(currentDate);
 }
 getCurrentDate();
 
 
 function saveEvent(){
-    localStorage.setItem("daySlot", JSON.stringify("daySlot"));
+    localStorage.setItem("daySlot", JSON.stringify(daySlot));
 }
 
 function displayEvent(){
-    daySlot.forEach(function(thisHour){
-        $("{#thisHour.id}").val(thisHour.plannedEvent)
+    daySlot.forEach(function(_thisHour){
+        $("#${_thisHour.id}").val(_thisHour.plannedEvent)
     })
 }
 
-function run(){
-    var storedEvent = JSON.parse(localStorage.getItem(daySlot));
+function init(){
+    var storedEvent = JSON.parse(localStorage.getItem("daySlot"));
 
     if(storedEvent){
         daySlot = storedEvent;
@@ -88,17 +83,19 @@ function run(){
     displayEvent();
 }
 
-// time to add the boxes 
+
 daySlot.forEach(function(thisHour){
 
     var dayPlan = $("<form>").attr({
         "class" : "row"
     });
+    $(".container").append(dayPlan);
 
     var timeSlot = $("<div>")
         .text("${thisHour.hour}${thisHour.timeMed}")
         .attr({"class": "col-md-2 hour"
     });
+
 
     var hourSlot = $("<div>")
         .attr({"class": "col-md=9 description p-0"
@@ -124,16 +121,18 @@ daySlot.forEach(function(thisHour){
 
 
 
-    var saveButton = $("<i class='far fa-save'></i>")
-    var savedPlan = $("<button>")
+    var saveButton = $("<i class='far fa-save fa-lg'></i>")
+    var savePlan = $("<button>")
         .attr({
             "class": "col-md-1 saveBtn"
     });
     savePlan.append(saveButton);
-    timeSlot.append(dayPlan, hourSlot, savedPlan);
+    timeSlot.append(dayPlan, hourSlot, savePlan);
 
 
 })
+
+init();
 
 $(".saveBtn").on("click", function(event){
     event.preventDefault();
@@ -143,6 +142,5 @@ $(".saveBtn").on("click", function(event){
     displayEvent();
 })
 
-// look on old code for the save button & local storage
 
 
