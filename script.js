@@ -107,10 +107,23 @@ daySlot.forEach(function(thisHour){
     var plannedData = $("<textarea>");
     hourSlot.append(plannedData);
     plannedData.attr("id", thisHour.id);
+    // color for boxes 
+    if(thisHour.time < DataTime_short){
+        plannedData.attr({
+            "class":"past"
+        })
+    }   else if(thisHour.time === Datatime_short){
+        plannedData.attr({
+            "class":"present"
+        })
+    }   else if(thisHour.time > Datatime_short){
+        plannedData.attr({
+            "class":"future"
+        })
+    }
 
 
 
-    // save button
     var saveButton = $("<i class='far fa-save'></i>")
     var savedPlan = $("<button>")
         .attr({
@@ -122,6 +135,13 @@ daySlot.forEach(function(thisHour){
 
 })
 
+$(".saveBtn").on("click", function(event){
+    event.preventDefault();
+    var saveIndex = $(this).siblings(".description").children(".future").attr("id");
+    daySlot[saveIndex].reminder = $(this).siblings(".description").children(".future").val();
+    saveEvent();
+    displayEvent();
+})
 
 // look on old code for the save button & local storage
 
