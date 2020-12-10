@@ -26,31 +26,31 @@ var daySlot = [
     },
     {
         hourSlotID : "01 ",
-        timeID: "13",
+        timeID: "1",
         plannedEvent:"",
         timeMed:"pm"
     },
     {
         hourSlotID : "02 ",
-        timeID: "14",
+        timeID: "12",
         plannedEvent:"",
         timeMed:"pm"
     },
     {
         hourSlotID: "03 ",
-        timeID: "15",
+        timeID: "3",
         plannedEvent:"",
         timeMed:"pm"
     },
     {
         hourSlotID : "04 ",
-        timeID: "16",
+        timeID: "4",
         plannedEvent:"",
         timeMed:"pm"
     },
     {
         hourSlotID : "05 ",
-        timeID: "17",
+        timeID: "5",
         plannedEvent:"",
         timeMed:"pm"
     }
@@ -93,27 +93,26 @@ daySlot.forEach(function(thisHour){
     var timeSlot = $("<div>")
         .text(`${thisHour.hourSlotID}${thisHour.timeMed}`)
         .attr({
-            "class": "col-md-2 hour"
+            "class": "col-md-1 hour"
     });
-
 
     var hourSlot = $("<div>")
         .attr({
-            "class": "col-md=9 description p-0"
+            "class": "col-md-9 description p-0"
         });
     
     var plannedData = $("<textarea>");
     hourSlot.append(plannedData);
     plannedData.attr("id", thisHour.id);
-    if (thisHour.time < luxon.DataTime_short){
+    if (thisHour.timeID < luxon.DateTime.local()){
         plannedData.attr({
             "class": "past",
         })
-    }   else if(thisHour.time === luxon.Datatime_short){
+    }   else if(thisHour.timeID === luxon.DateTime.local()){
         plannedData.attr({
             "class": "present"
         })
-    }   else if(thisHour.time > luxon.Datatime_short){
+    }   else if(thisHour.timeID > luxon.DateTime.local()){
         plannedData.attr({
             "class": "future"
         })
@@ -127,7 +126,6 @@ daySlot.forEach(function(thisHour){
     savePlan.append(saveButton);
     dayPlan.append(timeSlot, hourSlot, savePlan);
 
-
 })
 
 init();
@@ -135,7 +133,7 @@ init();
 $(".saveBtn").on("click", function(event){
     event.preventDefault();
     var saveIndex = $(this).siblings(".description").children(".future").attr("id");
-    daySlot[saveIndex].reminder = $(this).siblings(".description").children(".future").val();
+    daySlot[saveIndex].plannedEvent = $(this).siblings(".description").children(".future").val();
     saveEvent();
     displayEvent();
 })
