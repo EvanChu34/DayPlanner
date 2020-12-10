@@ -1,67 +1,65 @@
 // Timeblocks go here -->
 var daySlot = [
     {
-        hourSlotID = "1",
-        timeID= "9",
-        plannedEvent="",
-        timeMed="am"
+        hourSlotID: "09 ",
+        timeID: "9",
+        plannedEvent:"",
+        timeMed:"am"
     },
     {
-        hourSlotID = "2",
-        timeID= "10",
-        plannedEvent="",
-        timeMed="am"
+        hourSlotID : "10 ",
+        timeID: "10",
+        plannedEvent:"",
+        timeMed:"am"
     },
     {
-        hourSlotID = "3",
-        timeID= "11",
-        plannedEvent="",
-        timeMed="am"
+        hourSlotID : "11 ",
+        timeID: "11",
+        plannedEvent:"",
+        timeMed:"am"
     },
     {
-        hourSlotID = "4",
-        timeID= "12",
-        plannedEvent="",
-        timeMed="pm"
+        hourSlotID : "12 ",
+        timeID: "12",
+        plannedEvent:"",
+        timeMed:"pm"
     },
     {
-        hourSlotID = "5",
-        timeID= "1",
-        plannedEvent="",
-        timeMed="pm"
+        hourSlotID : "01 ",
+        timeID: "13",
+        plannedEvent:"",
+        timeMed:"pm"
     },
     {
-        hourSlotID = "6",
-        timeID= "2",
-        plannedEvent="",
-        timeMed="pm"
+        hourSlotID : "02 ",
+        timeID: "14",
+        plannedEvent:"",
+        timeMed:"pm"
     },
     {
-        hourSlotID= "7",
-        timeID= "3",
-        plannedEvent="",
-        timeMed="pm"
+        hourSlotID: "03 ",
+        timeID: "15",
+        plannedEvent:"",
+        timeMed:"pm"
     },
     {
-        hourSlotID = "8",
-        timeID= "4",
-        plannedEvent="",
-        timeMed="pm"
+        hourSlotID : "04 ",
+        timeID: "16",
+        plannedEvent:"",
+        timeMed:"pm"
     },
     {
-        hourSlotID = "9",
-        timeID= "5",
-        plannedEvent="",
-        timeMed="pm"
+        hourSlotID : "05 ",
+        timeID: "17",
+        plannedEvent:"",
+        timeMed:"pm"
     }
 ];
 
 function getCurrentDate(){
-    var currentDate = luxon.DateTime.local().toLocaleString(DateTime.DATE_MED)
+    var currentDate = luxon.DateTime.local().toFormat('MMMM dd, yyyy')
     $("#currentDay").text(currentDate);
 }
-getCurrentDate();
-
 
 function saveEvent(){
     localStorage.setItem("daySlot", JSON.stringify(daySlot));
@@ -69,7 +67,7 @@ function saveEvent(){
 
 function displayEvent(){
     daySlot.forEach(function(_thisHour){
-        $("#${_thisHour.id}").val(_thisHour.plannedEvent)
+        $(`#${_thisHour.id}`).val(_thisHour.plannedEvent)
     })
 }
 
@@ -83,43 +81,43 @@ function init(){
     displayEvent();
 }
 
+getCurrentDate();
 
 daySlot.forEach(function(thisHour){
 
     var dayPlan = $("<form>").attr({
-        "class" : "row"
+        "class": "row"
     });
     $(".container").append(dayPlan);
 
     var timeSlot = $("<div>")
-        .text("${thisHour.hour}${thisHour.timeMed}")
-        .attr({"class": "col-md-2 hour"
+        .text(`${thisHour.hourSlotID}${thisHour.timeMed}`)
+        .attr({
+            "class": "col-md-2 hour"
     });
 
 
     var hourSlot = $("<div>")
-        .attr({"class": "col-md=9 description p-0"
-    });
+        .attr({
+            "class": "col-md=9 description p-0"
+        });
     
     var plannedData = $("<textarea>");
     hourSlot.append(plannedData);
     plannedData.attr("id", thisHour.id);
-    // color for boxes 
-    if(thisHour.time < DataTime_short){
+    if (thisHour.time < luxon.DataTime_short){
         plannedData.attr({
-            "class":"past"
+            "class": "past",
         })
-    }   else if(thisHour.time === Datatime_short){
+    }   else if(thisHour.time === luxon.Datatime_short){
         plannedData.attr({
-            "class":"present"
+            "class": "present"
         })
-    }   else if(thisHour.time > Datatime_short){
+    }   else if(thisHour.time > luxon.Datatime_short){
         plannedData.attr({
-            "class":"future"
+            "class": "future"
         })
     }
-
-
 
     var saveButton = $("<i class='far fa-save fa-lg'></i>")
     var savePlan = $("<button>")
@@ -127,7 +125,7 @@ daySlot.forEach(function(thisHour){
             "class": "col-md-1 saveBtn"
     });
     savePlan.append(saveButton);
-    timeSlot.append(dayPlan, hourSlot, savePlan);
+    dayPlan.append(timeSlot, hourSlot, savePlan);
 
 
 })
