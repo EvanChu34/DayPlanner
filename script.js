@@ -65,8 +65,8 @@ function saveEvent(){
 }
 
 function displayEvent(){
-    daySlot.forEach(function(_thisHour){
-        $(`#${_thisHour.id}`).val(_thisHour.plannedEvent)
+    daySlot.forEach(function(thisHour){
+        $(`#${thisHour.id}`).val(thisHour.plannedEvent)
     })
 }
 
@@ -103,15 +103,15 @@ daySlot.forEach(function(thisHour){
     var plannedData = $("<textarea>");
     hourSlot.append(plannedData);
     plannedData.attr("id", thisHour.id);
-    if (thisHour.timeID < luxon.DateTime.local()){
+    if (thisHour.timeID < luxon.DateTime.local().toFormat('hh')){
         plannedData.attr({
             "class": "past",
         })
-    }   else if(thisHour.timeID === luxon.DateTime.local()){
+    }   else if(thisHour.timeID === luxon.DateTime.local().toFormat('hh')){
         plannedData.attr({
             "class": "present"
         })
-    }   else if(thisHour.timeID > luxon.DateTime.local()){
+    }   else if(thisHour.timeID > luxon.DateTime.local().toFormat('hh')){
         plannedData.attr({
             "class": "future"
         })
