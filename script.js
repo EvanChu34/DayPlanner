@@ -1,7 +1,6 @@
-// Timeblocks go here -->
 var daySlot = [
     {
-        hourSlotID: "09 ",
+        hourSlotID: "9 ",
         timeID: "9",
         plannedEvent:"",
         timeMed:"am"
@@ -25,32 +24,32 @@ var daySlot = [
         timeMed:"pm"
     },
     {
-        hourSlotID : "01 ",
-        timeID: "1",
+        hourSlotID : "1 ",
+        timeID: "13",
         plannedEvent:"",
         timeMed:"pm"
     },
     {
-        hourSlotID : "02 ",
-        timeID: "12",
+        hourSlotID : "2 ",
+        timeID: "14",
         plannedEvent:"",
         timeMed:"pm"
     },
     {
-        hourSlotID: "03 ",
-        timeID: "3",
+        hourSlotID: "3 ",
+        timeID: "15",
         plannedEvent:"",
         timeMed:"pm"
     },
     {
-        hourSlotID : "04 ",
-        timeID: "4",
+        hourSlotID : "4 ",
+        timeID: "16",
         plannedEvent:"",
         timeMed:"pm"
     },
     {
-        hourSlotID : "05 ",
-        timeID: "5",
+        hourSlotID : "5 ",
+        timeID: "17",
         plannedEvent:"",
         timeMed:"pm"
     }
@@ -137,6 +136,3 @@ $(".saveBtn").on("click", function(event){
     saveEvent();
     displayEvent();
 })
-
-
-
